@@ -1,9 +1,7 @@
-<script setup lang="ts">
+<script setup>
 import { computed, ref } from 'vue'
 
-type Task = { id: number; title: string; done: boolean }
-
-const tasks = ref<Task[]>([
+const tasks = ref([
   { id: 1, title: 'Revisar el enunciado y definir el modelo', done: true },
   { id: 2, title: 'Implementar la funcionalidad principal', done: false },
 ])
@@ -17,7 +15,7 @@ function addTask() {
   newTask.value = ''
 }
 
-function removeTask(id: number) {
+function removeTask(id) {
   tasks.value = tasks.value.filter((task) => task.id !== id)
 }
 </script>
@@ -25,7 +23,7 @@ function removeTask(id: number) {
 <template>
   <main class="mx-auto max-w-3xl px-5 py-12 sm:py-20">
     <header class="mb-9">
-      <p class="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-indigo-600">Vue 3 · TypeScript · Tailwind CSS 4</p>
+      <p class="mb-3 text-sm font-semibold uppercase tracking-[0.18em] text-indigo-600">Vue 3 · JavaScript · Tailwind CSS 4</p>
       <h1 class="text-4xl font-bold tracking-tight text-slate-900 sm:text-5xl">Interview starter</h1>
       <p class="mt-3 max-w-2xl text-lg text-slate-600">Plantilla lista para clonar y convertir rápidamente en la solución del ejercicio técnico.</p>
     </header>
