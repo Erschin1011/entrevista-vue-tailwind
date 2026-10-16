@@ -25,6 +25,13 @@ Frontend listo para clonar con **Vue 3**, **JavaScript**, **Vite** y **Tailwind 
 
 Instala **Node.js LTS** desde [nodejs.org](https://nodejs.org/); npm viene incluido. En el instalador de Windows deja habilitado agregar Node al PATH y cierra/abre PowerShell al terminar.
 
+En Windows también puedes buscar e instalar la versión LTS con winget:
+
+```powershell
+winget search --id OpenJS.NodeJS.LTS
+winget install --id OpenJS.NodeJS.LTS -e
+```
+
 ```powershell
 node --version
 npm --version
@@ -34,6 +41,37 @@ where.exe node
 Se recomienda Node 20 o superior. Instala Git for Windows desde [git-scm.com/download/win](https://git-scm.com/download/win) para clonar. VS Code es opcional.
 
 **No tienes que instalar Vue ni Tailwind globalmente.** El repo declara sus versiones en `package.json` y `package-lock.json`; npm las instala localmente al proyecto.
+
+## Crear otro proyecto Vue + Tailwind desde cero
+
+Para generar un frontend Vue con JavaScript mediante Vite:
+
+```powershell
+npm create vite@latest mi-frontend -- --template vue
+cd mi-frontend
+npm install
+npm install -D tailwindcss @tailwindcss/vite
+```
+
+En `vite.config.js`, conserva el plugin de Vue y añade Tailwind:
+
+```js
+import vue from '@vitejs/plugin-vue'
+import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  plugins: [vue(), tailwindcss()],
+})
+```
+
+En la hoja CSS que importe `src/main.js` escribe:
+
+```css
+@import "tailwindcss";
+```
+
+Después arranca Vite con `npm run dev`. Esta plantilla ya trae esos pasos configurados y por eso al clonar basta con el script de setup.
 
 ## Clonar e instalar
 
@@ -70,10 +108,11 @@ Comandos diarios:
 npm run dev       # desarrollo y hot reload
 npm run build     # build de producción en dist/
 npm run preview   # previsualiza dist localmente
-npm test          # aún no hay suite de pruebas para la UI
 npm ls --depth=0  # listar dependencias directas
 npm audit         # comprobar avisos de seguridad de dependencias
 ```
+
+Esta plantilla no define un script `npm test` porque aún no incluye un framework de pruebas de UI.
 
 No subas `node_modules/` ni `dist/`; `.gitignore` ya los excluye. En producción publica el contenido generado en `dist/` usando el hosting que indique el ejercicio.
 
